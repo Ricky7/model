@@ -35,12 +35,12 @@ class Logtransaksi_model extends CI_Model{
   }
 
   // show log by User
-  public function getLogByUser($id_user)
+  public function getLogByUser($user_id)
   {
       $this->db->select('*');
       $this->db->from('inm_log_transaksi a');
       $this->db->join('inm_jenis_log b', 'a.jenis_log = b.kode_log');
-      $this->db->where('a.id_user', $id_user);
+      $this->db->where('a.user_id', $user_id);
       $query = $this->db->get();
       if($query->num_rows() != 0)
       {
@@ -53,12 +53,12 @@ class Logtransaksi_model extends CI_Model{
   }
 
   // show log by Jenis Log & User
-  public function getLogByUserAndJenis($id_user, $jenis_log)
+  public function getLogByUserAndJenis($user_id, $jenis_log)
   {
       $this->db->select('*');
       $this->db->from('inm_log_transaksi a');
       $this->db->join('inm_jenis_log b', 'a.jenis_log = b.kode_log');
-      $this->db->where('a.id_user', $id_user);
+      $this->db->where('a.user_id', $user_id);
       $this->db->where('a.jenis_log', $jenis_log);
       $query = $this->db->get();
       if($query->num_rows() != 0)
@@ -72,12 +72,12 @@ class Logtransaksi_model extends CI_Model{
   }
 
   // show log by User & Date
-  public function getLogByUserAndDate($id_user, $tanggal)
+  public function getLogByUserAndDate($user_id, $tanggal)
   {
       $this->db->select('*');
       $this->db->from('inm_log_transaksi a');
       $this->db->join('inm_jenis_log b', 'a.jenis_log = b.kode_log');
-      $this->db->where('a.id_user', $id_user);
+      $this->db->where('a.user_id', $user_id);
       $this->db->where('a.tgl_create', $tanggal);
       $query = $this->db->get();
       if($query->num_rows() != 0)
@@ -91,12 +91,12 @@ class Logtransaksi_model extends CI_Model{
   }
 
   // show log by User & Start Date - End Date
-  public function getLogByUserAndIntervalDate($id_user, $start_date, $end_date)
+  public function getLogByUserAndIntervalDate($user_id, $start_date, $end_date)
   {
       $this->db->select('*');
       $this->db->from('inm_log_transaksi a');
       $this->db->join('inm_jenis_log b', 'a.jenis_log = b.kode_log');
-      $this->db->where('a.id_user', $id_user);
+      $this->db->where('a.user_id', $user_id);
       $this->db->where('a.tgl_create >=', $start_date);
       $this->db->where('a.tgl_create <=', $end_date);
       $query = $this->db->get();
@@ -132,7 +132,7 @@ class Logtransaksi_model extends CI_Model{
   // insert log by Jenis log
   // isi dalam array $data
   // jenis_log  = kode_log (ada diatas)
-  // id_user = id user/loket 
+  // id_user = id user/loket
   // response_message
   // response_json
   // tgl_create = now
