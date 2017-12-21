@@ -43,4 +43,25 @@ class Produk_model extends CI_Model{
       $this->db->delete('inm_produk');
       return true;
   }
+
+  public function getProdukWhereJenisAndVendor($jenis_produk_id,$kode_produk,$kode_vendor,$kode_produk_vendor)
+  {
+        $this->db->select('*');
+        $this->db->from('inm_produk');
+
+        if(!is_null($jenis_produk_id) && $jenis_produk_id!='')
+        $this->db->where("jenis_produk_id=", $jenis_produk_id);
+
+        if(!is_null($kode_produk) && $kode_produk!='')
+        $this->db->where("kode_produk=", $kode_produk);
+
+        if(!is_null($kode_produk_vendor) && $kode_produk_vendor!='')
+        $this->db->where("kode_produk_vendor=", $kode_produk_vendor);
+
+        if(!is_null($kode_vendor) && $kode_vendor!='')
+        $this->db->where("kode_vendor=", $kode_vendor);
+
+        $query = $this->db->get();
+        return $query;
+    }
 }
